@@ -51,17 +51,27 @@ Enter the following command to initiate pairing:
 $ pyvizio --ip={ip:port} --device_type={device_type} pair
 ```
 
+Example:
+```bash
+$ pyvizio --ip=192.168.1.123:7345 --device_type=tv pair
+```
+
 Initiation will show you two different values:
 
 | Value           | Description                                                                                             |
 | :-------------- | :------------------------------------------------------------------------------------------------------ |
-| Challenge type  | Usually it should be `"1"`. If not, use the additional parameter `--ch_type=your_type` in the next step |
+| Challenge type  | ch_type parameter required `--ch_type={your_type}` in the next step                                     |
 | Challenge token | Token required to finalize pairing in the next step                                                     |
 
 At this point, a PIN code should be displayed at the top of your TV. With all these values, you can now finish pairing:
 
 ```bash
-$ pyvizio --ip={ip:port} --device_type={device_type} pair-finish --token={challenge_token} --pin={pin}
+$ pyvizio --ip={ip:port} --device_type={device_type} pair-finish --ch_type={your_type} --token={challenge_token} --pin={pin}
+```
+
+Example:
+```bash
+$ pyvizio --ip=192.168.1.123:7345 --device_type=tv pair-finish --ch_type=1 --token=123456 --pin=1234
 ```
 
 You will need the authentication token returned by this command to configure Home Assistant.
